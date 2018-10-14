@@ -181,7 +181,7 @@ void AI_Instant::TimerTicked()
     }
 
 	int dataCylic = ui.sldTimerValue->value();
-	graph->Chart(scaledData, configure.channelCount, 1, 1.0 * dataCylic / 1000);
+    graph->Chart(scaledData, configure.channelCount, 1, 1.0 * dataCylic / 1000);
 	RefreshList();
 }
 
@@ -239,49 +239,49 @@ void AI_Instant::RefreshList()
                 case 0:if (csvFile_0.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_0<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_0.close();
+                               csvFile_0.close();
                            }
                            break;
                 case 1:if (csvFile_1.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_1<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_1.close();
+                               csvFile_1.close();
                            }
                            break;
                 case 2:if (csvFile_2.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_2<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_2.close();
+                               csvFile_2.close();
                            }
                            break;
                 case 3:if (csvFile_3.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_3<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_3.close();
+                               csvFile_3.close();
                            }
                            break;
                 case 4:if (csvFile_4.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_4<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_4.close();
+                               csvFile_4.close();
                            }
                            break;
                 case 5:if (csvFile_5.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_5<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_5.close();
+                               csvFile_5.close();
                            }
                            break;
                 case 6:if (csvFile_6.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_6<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_6.close();
+                               csvFile_6.close();
                            }
                            break;
                 case 7:if (csvFile_7.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_7<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_7.close();
+                               csvFile_7.close();
                            }
                            break;
                 }

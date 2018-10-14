@@ -63,10 +63,10 @@ public:
         Time_Frame->setFrameShadow(QFrame::Raised);
         lbl_time = new QLabel(fft_dialog);
         lbl_time->setObjectName(QStringLiteral("lbl_time"));
-        lbl_time->setGeometry(QRect(660, 80, 54, 12));
+        lbl_time->setGeometry(QRect(660, 250, 54, 12));
         lbl_fre = new QLabel(fft_dialog);
         lbl_fre->setObjectName(QStringLiteral("lbl_fre"));
-        lbl_fre->setGeometry(QRect(660, 250, 54, 12));
+        lbl_fre->setGeometry(QRect(660, 80, 54, 12));
         lbl_fre_choice = new QLabel(fft_dialog);
         lbl_fre_choice->setObjectName(QStringLiteral("lbl_fre_choice"));
         lbl_fre_choice->setGeometry(QRect(20, 370, 81, 16));
