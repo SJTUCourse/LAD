@@ -16,14 +16,17 @@ INCLUDEPATH += ../inc/bdaqctrl.h
 SOURCES += configuredialog.cpp\
 		   main.cpp\
 		   ai_instant.cpp\
-           ../common/simplegraph.cpp
+           ../common/simplegraph.cpp \
+    fft_dialog.cpp
 
 HEADERS += configuredialog.h\
            ai_instant.h\
-           ../common/simplegraph.h\
+           ../common/simplegraph.h \
+    fft_dialog.h
 
 FORMS   += configuredialog.ui \ 
-		   ai_instant.ui
+		   ai_instant.ui \
+    fft_dialog.ui
 
 RESOURCES += ai_instant.qrc
 

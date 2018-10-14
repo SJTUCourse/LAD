@@ -46,6 +46,9 @@ public:
     QLineEdit *edtTimeValue_scale;
     QLineEdit *edtAmp_scale_min;
     QLineEdit *edtAmp_scale_max;
+    QListWidget *listWidget_click;
+    QLabel *lbl_click;
+    QPushButton *btnFFT;
 
     void setupUi(QDialog *AI_InstantFrame)
     {
@@ -79,7 +82,7 @@ public:
         lblXCoordinateStart->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
         listWidget = new QListWidget(AI_InstantFrame);
         listWidget->setObjectName(QStringLiteral("listWidget"));
-        listWidget->setGeometry(QRect(50, 420, 371, 81));
+        listWidget->setGeometry(QRect(10, 420, 281, 81));
         listWidget->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         listWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         listWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -111,27 +114,27 @@ public:
         btnConfigure = new QPushButton(AI_InstantFrame);
         btnConfigure->setObjectName(QStringLiteral("btnConfigure"));
         btnConfigure->setEnabled(true);
-        btnConfigure->setGeometry(QRect(440, 440, 81, 23));
+        btnConfigure->setGeometry(QRect(370, 480, 81, 23));
         btnConfigure->setAutoDefault(false);
         btnStart = new QPushButton(AI_InstantFrame);
         btnStart->setObjectName(QStringLiteral("btnStart"));
         btnStart->setEnabled(true);
-        btnStart->setGeometry(QRect(440, 480, 81, 23));
+        btnStart->setGeometry(QRect(470, 480, 81, 23));
         btnPause = new QPushButton(AI_InstantFrame);
         btnPause->setObjectName(QStringLiteral("btnPause"));
         btnPause->setEnabled(false);
-        btnPause->setGeometry(QRect(540, 480, 81, 23));
+        btnPause->setGeometry(QRect(570, 480, 81, 23));
         btnStop = new QPushButton(AI_InstantFrame);
         btnStop->setObjectName(QStringLiteral("btnStop"));
         btnStop->setEnabled(false);
-        btnStop->setGeometry(QRect(633, 480, 75, 23));
+        btnStop->setGeometry(QRect(670, 480, 75, 23));
         btnStop->setAutoDefault(false);
         sldXscale = new QSlider(AI_InstantFrame);
         sldXscale->setObjectName(QStringLiteral("sldXscale"));
         sldXscale->setEnabled(true);
         sldXscale->setGeometry(QRect(270, 390, 391, 21));
         sldXscale->setMinimum(1);
-        sldXscale->setMaximum(50);
+        sldXscale->setMaximum(100);
         sldXscale->setSingleStep(10);
         sldXscale->setValue(10);
         sldXscale->setOrientation(Qt::Horizontal);
@@ -168,6 +171,21 @@ public:
         edtAmp_scale_max->setGeometry(QRect(40, 40, 45, 22));
         edtAmp_scale_max->setAlignment(Qt::AlignCenter);
         edtAmp_scale_max->setReadOnly(true);
+        listWidget_click = new QListWidget(AI_InstantFrame);
+        listWidget_click->setObjectName(QStringLiteral("listWidget_click"));
+        listWidget_click->setGeometry(QRect(420, 420, 101, 31));
+        listWidget_click->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listWidget_click->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        listWidget_click->setSelectionMode(QAbstractItemView::NoSelection);
+        listWidget_click->setFlow(QListView::LeftToRight);
+        listWidget_click->setProperty("isWrapping", QVariant(true));
+        lbl_click = new QLabel(AI_InstantFrame);
+        lbl_click->setObjectName(QStringLiteral("lbl_click"));
+        lbl_click->setGeometry(QRect(310, 420, 111, 31));
+        lbl_click->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+        btnFFT = new QPushButton(AI_InstantFrame);
+        btnFFT->setObjectName(QStringLiteral("btnFFT"));
+        btnFFT->setGeometry(QRect(310, 480, 41, 23));
         QWidget::setTabOrder(btnConfigure, btnStart);
         QWidget::setTabOrder(btnStart, btnPause);
         QWidget::setTabOrder(btnPause, btnStop);
@@ -200,6 +218,8 @@ public:
         edtTimeValue_scale->setText(QApplication::translate("AI_InstantFrame", "10", nullptr));
         edtAmp_scale_min->setText(QApplication::translate("AI_InstantFrame", "-10", nullptr));
         edtAmp_scale_max->setText(QApplication::translate("AI_InstantFrame", "10", nullptr));
+        lbl_click->setText(QApplication::translate("AI_InstantFrame", "The Amp clicked:", nullptr));
+        btnFFT->setText(QApplication::translate("AI_InstantFrame", "FFT", nullptr));
     } // retranslateUi
 
 };
