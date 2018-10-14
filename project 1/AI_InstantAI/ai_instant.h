@@ -59,6 +59,7 @@ private slots:
 	void ButttonPauseClicked();
 	void ButtonStopClicked();
     void ButtonFFTClicked();
+    void CmbIndexChanged(int);
 };
 
 #endif // AI_INSTANT_H

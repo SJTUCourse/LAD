@@ -24,7 +24,6 @@ AI_Instant::AI_Instant(QWidget *parent, Qt::WindowFlags flags)
 		scaledData[i] = 0;
 	}
     instantAiCtrl = nullptr;
-
 	timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(TimerTicked()));
     connect(ui.sldTimerValue, SIGNAL(valueChanged(int)), this, SLOT(SliderValueChanged(int)));
@@ -32,11 +31,10 @@ AI_Instant::AI_Instant(QWidget *parent, Qt::WindowFlags flags)
 	connect(ui.btnStart, SIGNAL(clicked()), this, SLOT(ButtonStartClicked()));
 	connect(ui.btnPause, SIGNAL(clicked()), this, SLOT(ButttonPauseClicked()));
 	connect(ui.btnStop, SIGNAL(clicked()), this, SLOT(ButtonStopClicked()));
-
     connect(ui.btnFFT,SIGNAL(clicked()),this,SLOT(ButtonFFTClicked()));
     connect(ui.sldXscale,SIGNAL(valueChanged(int)),this,SLOT(SliderXScaleChanged(int)));
     connect(ui.sldYscale,SIGNAL(valueChanged(int)),this,SLOT(SliderYScaleChanged(int)));
-
+    connect(ui.cmb_channel_choice,SIGNAL(currentIndexChanged(int)),this,SLOT(CmbIndexChanged(int)));
 	graph = new SimpleGraph(ui.graphFrame);
 	graph->setFixedSize(ui.graphFrame->size());
 
@@ -81,10 +79,8 @@ void AI_Instant::Initialize()
 	ui.btnPause->setEnabled(false);
 	ui.btnStop->setEnabled(false);
 	ui.sldTimerValue->setEnabled(true);
-
     ui.sldXscale->setEnabled(true);
     ui.sldYscale->setEnabled(true);
-
     ui.edtTimeValue_scale->setText(QString("%1").arg(ui.sldXscale->value()));
     ui.edtAmp_scale_max->setText(QString("%1").arg(ui.sldYscale->value()));
     ui.edtAmp_scale_min->setText(QString("%1").arg(ui.sldYscale->value()*(-1)));
@@ -252,37 +248,37 @@ void AI_Instant::RefreshList()
                                //csvFile_1.close();
                            }
                            break;
-                case 2:if (csvFile_2.open(QIODevice::Text |QIODevice::Append))
+                case 2:if (csvFile_2.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_2<<dataStr<<"\t"<<0<<endl;
                                //csvFile_2.close();
                            }
                            break;
-                case 3:if (csvFile_3.open(QIODevice::Text |QIODevice::Append))
+                case 3:if (csvFile_3.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_3<<dataStr<<"\t"<<0<<endl;
                                //csvFile_3.close();
                            }
                            break;
-                case 4:if (csvFile_4.open(QIODevice::Text |QIODevice::Append))
+                case 4:if (csvFile_4.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_4<<dataStr<<"\t"<<0<<endl;
                                //csvFile_4.close();
                            }
                            break;
-                case 5:if (csvFile_5.open(QIODevice::Text |QIODevice::Append))
+                case 5:if (csvFile_5.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_5<<dataStr<<"\t"<<0<<endl;
                                //csvFile_5.close();
                            }
                            break;
-                case 6:if (csvFile_6.open(QIODevice::Text |QIODevice::Append))
+                case 6:if (csvFile_6.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_6<<dataStr<<"\t"<<0<<endl;
                                //csvFile_6.close();
                            }
                            break;
-                case 7:if (csvFile_7.open(QIODevice::Text |QIODevice::Append))
+                case 7:if (csvFile_7.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_7<<dataStr<<"\t"<<0<<endl;
                                //csvFile_7.close();
@@ -290,8 +286,6 @@ void AI_Instant::RefreshList()
                            break;
                 }
 	}
-
-
 }
 
 void AI_Instant::SliderValueChanged(int value)
@@ -365,4 +359,8 @@ void AI_Instant::ButtonFFTClicked()
 {
     fre_graph->show();
     fre_graph->update();
+}
+void AI_Instant::CmbIndexChanged(int value)
+{
+    fre_graph->channel = value;
 }

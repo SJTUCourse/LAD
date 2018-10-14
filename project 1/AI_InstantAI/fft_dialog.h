@@ -18,6 +18,7 @@ public:
     ~fft_dialog();
     double fs = 100;
     void update();
+    int channel = 0;
 
 
 private:

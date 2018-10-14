@@ -16,6 +16,7 @@ fft_dialog::fft_dialog(QWidget *parent) :
     connect(ui->btn_size_change,SIGNAL(clicked()),this,SLOT(ButttonSizeChangeClicked()));
     connect(ui->sld_fre,SIGNAL(valueChanged(int)),this,SLOT(SLideFreChange(int)));
     connect(ui->sld_size,SIGNAL(valueChanged(int)),this,SLOT(SLideSizeChange(int)));
+
 }
 
 fft_dialog::~fft_dialog()
@@ -24,13 +25,13 @@ fft_dialog::~fft_dialog()
 }
 void fft_dialog::ButtonLowPassClicked()
 {
-    order_filter_min = qRound((fs/2.0-ui->sld_fre->value()/1000.0*(fs/2.0))/(fs/2.0)*N);
-    order_filter_max = qRound((fs/2.0+ui->sld_fre->value()/1000.0*(fs/2.0))/(fs/2.0)*N);
+    order_filter_min = qRound((fs/2.0-ui->sld_fre->value()/1000.0*(fs/2.0))/(fs)*N);
+    order_filter_max = qRound((fs/2.0+ui->sld_fre->value()/1000.0*(fs/2.0))/(fs)*N);
 }
 void fft_dialog::ButtonHighPassClicked()
 {
-    order_filter_min = qRound((fs/2.0-ui->sld_fre->value()/1000.0*(fs/2.0))/(fs/2.0)*N);
-    order_filter_max = qRound((fs/2.0+ui->sld_fre->value()/1000.0*(fs/2.0))/(fs/2.0)*N);
+    order_filter_min = qRound((fs/2.0-ui->sld_fre->value()/1000.0*(fs/2.0))/(fs)*N);
+    order_filter_max = qRound((fs/2.0+ui->sld_fre->value()/1000.0*(fs/2.0))/(fs)*N);
 }
 void fft_dialog::ButttonSizeChangeClicked()
 {
@@ -55,4 +56,5 @@ void fft_dialog::update()
     ui->lbl_fre_now->setText(str);
     str.sprintf("%.4f", qPow(10,(ui->sld_size->value()/100.0*2)));
     ui->lbl_size_now->setText(str);
+    ui->lbl_chan_now->setText(QString::number(channel));
 }

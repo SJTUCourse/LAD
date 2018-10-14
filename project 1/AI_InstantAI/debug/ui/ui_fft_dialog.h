@@ -39,6 +39,9 @@ public:
     QPushButton *btn_size_change;
     QLabel *lbl_fre_now;
     QLabel *lbl_size_now;
+    QLabel *lbl_chan_choice;
+    QLabel *lbl_chan_now;
+    QPushButton *btn_show;
 
     void setupUi(QDialog *fft_dialog)
     {
@@ -74,7 +77,7 @@ public:
         sld_fre->setObjectName(QStringLiteral("sld_fre"));
         sld_fre->setGeometry(QRect(210, 370, 501, 19));
         sld_fre->setMaximum(1000);
-        sld_fre->setValue(10);
+        sld_fre->setValue(1000);
         sld_fre->setOrientation(Qt::Horizontal);
         lbl_fre_0hz = new QLabel(fft_dialog);
         lbl_fre_0hz->setObjectName(QStringLiteral("lbl_fre_0hz"));
@@ -96,19 +99,28 @@ public:
         lbl_size_2->setGeometry(QRect(720, 460, 21, 16));
         btn_lowpass = new QPushButton(fft_dialog);
         btn_lowpass->setObjectName(QStringLiteral("btn_lowpass"));
-        btn_lowpass->setGeometry(QRect(360, 400, 75, 23));
+        btn_lowpass->setGeometry(QRect(284, 400, 91, 23));
         btn_highpass = new QPushButton(fft_dialog);
         btn_highpass->setObjectName(QStringLiteral("btn_highpass"));
-        btn_highpass->setGeometry(QRect(500, 400, 75, 23));
+        btn_highpass->setGeometry(QRect(410, 400, 91, 23));
         btn_size_change = new QPushButton(fft_dialog);
         btn_size_change->setObjectName(QStringLiteral("btn_size_change"));
         btn_size_change->setGeometry(QRect(410, 480, 91, 23));
         lbl_fre_now = new QLabel(fft_dialog);
         lbl_fre_now->setObjectName(QStringLiteral("lbl_fre_now"));
-        lbl_fre_now->setGeometry(QRect(110, 370, 61, 16));
+        lbl_fre_now->setGeometry(QRect(110, 370, 51, 16));
         lbl_size_now = new QLabel(fft_dialog);
         lbl_size_now->setObjectName(QStringLiteral("lbl_size_now"));
-        lbl_size_now->setGeometry(QRect(130, 440, 61, 16));
+        lbl_size_now->setGeometry(QRect(110, 440, 61, 16));
+        lbl_chan_choice = new QLabel(fft_dialog);
+        lbl_chan_choice->setObjectName(QStringLiteral("lbl_chan_choice"));
+        lbl_chan_choice->setGeometry(QRect(20, 400, 81, 16));
+        lbl_chan_now = new QLabel(fft_dialog);
+        lbl_chan_now->setObjectName(QStringLiteral("lbl_chan_now"));
+        lbl_chan_now->setGeometry(QRect(110, 400, 16, 16));
+        btn_show = new QPushButton(fft_dialog);
+        btn_show->setObjectName(QStringLiteral("btn_show"));
+        btn_show->setGeometry(QRect(530, 400, 91, 23));
 
         retranslateUi(fft_dialog);
 
@@ -121,7 +133,7 @@ public:
         lbl_time->setText(QApplication::translate("fft_dialog", "\346\227\266\345\237\237", nullptr));
         lbl_fre->setText(QApplication::translate("fft_dialog", "\351\242\221\345\237\237", nullptr));
         lbl_fre_choice->setText(QApplication::translate("fft_dialog", "\346\273\244\346\263\242\351\242\221\347\216\207\351\200\211\346\213\251", nullptr));
-        lbl_size_choice->setText(QApplication::translate("fft_dialog", "lg(\347\274\251\346\224\276\345\271\205\345\272\246\351\200\211\346\213\251)", nullptr));
+        lbl_size_choice->setText(QApplication::translate("fft_dialog", "lg(\347\274\251\346\224\276\345\271\205\345\272\246)", nullptr));
         lbl_fre_0hz->setText(QApplication::translate("fft_dialog", "0Hz", nullptr));
         lbl_fre_fs->setText(QApplication::translate("fft_dialog", "fs/2", nullptr));
         lbl_size_neg2->setText(QApplication::translate("fft_dialog", "-2", nullptr));
@@ -129,8 +141,11 @@ public:
         btn_lowpass->setText(QApplication::translate("fft_dialog", "\344\275\216\351\200\232\346\273\244\346\263\242", nullptr));
         btn_highpass->setText(QApplication::translate("fft_dialog", "\351\253\230\351\200\232\346\273\244\346\263\242", nullptr));
         btn_size_change->setText(QApplication::translate("fft_dialog", "\347\274\251\346\224\276\344\277\241\345\217\267", nullptr));
-        lbl_fre_now->setText(QApplication::translate("fft_dialog", "10", nullptr));
+        lbl_fre_now->setText(QApplication::translate("fft_dialog", "50", nullptr));
         lbl_size_now->setText(QApplication::translate("fft_dialog", "1", nullptr));
+        lbl_chan_choice->setText(QApplication::translate("fft_dialog", "\345\275\223\345\211\215\351\200\211\346\213\251\351\200\232\351\201\223", nullptr));
+        lbl_chan_now->setText(QApplication::translate("fft_dialog", "0", nullptr));
+        btn_show->setText(QApplication::translate("fft_dialog", "\344\277\241\345\217\267\346\230\276\347\244\272", nullptr));
     } // retranslateUi
 
 };
