@@ -329,7 +329,7 @@
     <string>-fs/2</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_10V_neg">
+  <widget class="QLabel" name="lbl_20V_neg">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -339,10 +339,10 @@
     </rect>
    </property>
    <property name="text">
-    <string>-10V</string>
+    <string>-20V</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_10V_pos">
+  <widget class="QLabel" name="lbl_20V_pos">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -352,7 +352,7 @@
     </rect>
    </property>
    <property name="text">
-    <string> 10V</string>
+    <string> 20V</string>
    </property>
   </widget>
  </widget>

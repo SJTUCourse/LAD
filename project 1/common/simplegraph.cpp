@@ -182,7 +182,7 @@ void SimpleGraph::CalcDrawParams(double XIncBySec)
 void SimpleGraph::SaveData(double *data, int plotCount, int dataCountPerPlot)
 {
 	if (dataCountPerPlot * plotCount > m_drawDataBufferLength)
-    {
+	{
 		if (m_drawDataBuffer != NULL)
 		{
 			delete []m_drawDataBuffer;
@@ -293,13 +293,14 @@ void SimpleGraph::Clear(void)
 
 void SimpleGraph::Shift(int shiftTime)
 {
-    m_mapDataIndexPerPlot = 0;
+   m_mapDataIndexPerPlot = 0;
 	m_xCordTimeOffset = shiftTime;
 	Draw();
 }
 
 void SimpleGraph::Div(int divTime)
 {
+   //m_mapDataIndexPerPlot = 0;
 	m_xCordTimeDiv = divTime;
 	Draw();
 }

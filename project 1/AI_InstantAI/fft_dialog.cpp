@@ -25,12 +25,12 @@ fft_dialog::fft_dialog(QWidget *parent) :
     graph_time->setFixedSize(ui->Time_Frame->size());
 
     graph_fre->m_xCordTimeDiv = 1024;
-    graph_fre->m_yCordRangeMax = 800;
-    graph_fre->m_yCordRangeMin = -200;
+    graph_fre->m_yCordRangeMax = 600;
+    graph_fre->m_yCordRangeMin = -150;
 
     graph_time->m_xCordTimeDiv = 1024;
-    graph_time->m_yCordRangeMax = 10;
-    graph_time->m_yCordRangeMin = -10;
+    graph_time->m_yCordRangeMax = 20;
+    graph_time->m_yCordRangeMin = -20;
 }
 
 fft_dialog::~fft_dialog()
@@ -57,9 +57,10 @@ void fft_dialog::ButtonLowPassClicked()
 
     //Ifft shift 操作
     for (i=0 ; i<N;i++)
-       { filterreal[i]=filterreal[i]*pow(-1.0,i);
-         filterimag[i]=filterimag[i]*pow(-1.0,i);
-       }
+    {
+        filterreal[i]=filterreal[i]*pow(-1.0,i);
+        filterimag[i]=filterimag[i]*pow(-1.0,i);
+    }
 
     //显示IFFT_结果
     graph_time->Chart(filterreal, 1, 1024, 1.0 * 10 / 1000);
@@ -89,9 +90,10 @@ void fft_dialog::ButtonHighPassClicked()
 
     //Ifft shift 操作
     for (i=0 ; i<N;i++)
-       { filterreal[i]=filterreal[i]*pow(-1.0,i);
-         filterimag[i]=filterimag[i]*pow(-1.0,i);
-       }
+    {
+        filterreal[i]=filterreal[i]*pow(-1.0,i);
+        filterimag[i]=filterimag[i]*pow(-1.0,i);
+    }
 
     //显示IFFT_结果
     graph_time->Chart(filterreal, 1, 1024, 1.0 * 10 / 1000);
@@ -100,7 +102,27 @@ void fft_dialog::ButtonHighPassClicked()
 void fft_dialog::ButttonSizeChangeClicked()
 {
     size_change_form_origin = qPow(10,(ui->sld_size->value()/100.0*2));
-    graph_time->Clear();
+
+    double filterreal [1024]={0}, filterimag [1024] ={0};
+    for (int i=0; i<N;i++)
+    {
+        filterreal[i]=xreal[i];
+        filterimag[i]=ximag[i];
+    }
+    //Ifft 操作
+    IFFT (filterreal, filterimag, N);
+
+    //Ifft shift 操作
+    for (int i=0 ; i<N;i++)
+    {
+        filterreal[i]=filterreal[i]*pow(-1.0,i);
+        filterimag[i]=filterimag[i]*pow(-1.0,i);
+    }
+
+    double size_out [1024] = {0};
+    for(int i=0;i<N;i++)
+        size_out[i] = size_change_form_origin * filterreal[i];
+    graph_time->Chart(size_out, 1, 1024, 1.0 * 10 / 1000);
 }
 
 void fft_dialog::SLideFreChange(int value)
