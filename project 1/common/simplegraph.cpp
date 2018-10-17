@@ -2,6 +2,8 @@
 #include <math.h>
 #include <QPainter>
 #include <QtWidgets/QMessageBox>
+#include <QMouseEvent>
+
 using namespace std;
 
 
@@ -52,21 +54,21 @@ SimpleGraph::SimpleGraph(QWidget *parent)
 	m_xPosition = 0;
 
 	setPalette(QPalette(Qt::black));
-	setAutoFillBackground(true);
+    setAutoFillBackground(true);
 }
 
 SimpleGraph::~SimpleGraph()
 {
-	if (m_drawDataBuffer != NULL)
+    if (m_drawDataBuffer != nullptr)
 	{
 		delete []m_drawDataBuffer;
-		m_drawDataBuffer = NULL;
+        m_drawDataBuffer = nullptr;
 	}
 
-	if (m_dataPointBuffer != NULL)
+    if (m_dataPointBuffer != nullptr)
 	{
 		delete []m_dataPointBuffer;
-		m_dataPointBuffer = NULL;
+        m_dataPointBuffer = nullptr;
 	}
 }
 
@@ -113,31 +115,31 @@ void SimpleGraph::Chart(double *dataScaled,
 	m_dataCountPerPlot = dataCountPerPlot;
 	m_recordEndFlag = recordEndFlag;
 
-	if (NULL == m_drawDataBuffer || plotCount != m_plotCount)
+    if (nullptr == m_drawDataBuffer || plotCount != m_plotCount)
 	{
-		if (m_drawDataBuffer != NULL)
+        if (m_drawDataBuffer != nullptr)
 		{
 			delete []m_drawDataBuffer;
-			m_drawDataBuffer = NULL;
+            m_drawDataBuffer = nullptr;
 		}
 
 		m_drawDataBufferLength = plotCount * (rect().width() * 4 + 1);
 		m_drawDataBuffer = new double[m_drawDataBufferLength];
 		memset(m_drawDataBuffer, 0, m_drawDataBufferLength * sizeof(double));
-		if (m_drawDataBuffer == NULL)
+        if (m_drawDataBuffer == nullptr)
 		{
 			QMessageBox::information(this, "Warning", tr("Sorry! Error in allocating memory..."));
 			return;
 		}
 
-		if (m_dataPointBuffer != NULL)
+        if (m_dataPointBuffer != nullptr)
 		{
 			delete []m_dataPointBuffer;
-			m_dataPointBuffer = NULL;
+            m_dataPointBuffer = nullptr;
 		}
 
 		m_dataPointBuffer = new QPoint[plotCount * (rect().width() * 4 + 1)];
-		if (m_dataPointBuffer == NULL)
+        if (m_dataPointBuffer == nullptr)
 		{
 			QMessageBox::information(this, "Warning", tr("Sorry! Error in allocating memory..."));
 			return;
@@ -183,14 +185,14 @@ void SimpleGraph::SaveData(double *data, int plotCount, int dataCountPerPlot)
 {
 	if (dataCountPerPlot * plotCount > m_drawDataBufferLength)
 	{
-		if (m_drawDataBuffer != NULL)
+        if (m_drawDataBuffer != nullptr)
 		{
 			delete []m_drawDataBuffer;
-			m_drawDataBuffer = NULL;
+            m_drawDataBuffer = nullptr;
 		}
 		m_drawDataBufferLength = (dataCountPerPlot + 1) * plotCount;
 		m_drawDataBuffer = new double[m_drawDataBufferLength];
-		if (m_drawDataBuffer == NULL)
+        if (m_drawDataBuffer == nullptr)
 		{
 			QMessageBox::information(this, "Warning", tr("Sorry! Error in allocating memory..."));
 			return;
@@ -258,7 +260,6 @@ void SimpleGraph::MapDataPoints()
 
     for (int index = 0; index < m_copyDataCountPerChan; ++index)
     {
-        //TRACE("index:%d\n",index);
         for (int i = 0; i < m_plotCount; i++)
         {
             int dataIndex = i * (rect().width() * 4 + 1) + index;
@@ -370,3 +371,4 @@ void SimpleGraph::GetYCordRange(QString *rangeStrs,
 	rangeStrs[0] += spted_unit[index];
 	rangeStrs[2] = (rangeMax == - rangeMin) ? tr("0") : tr("");
 }
+

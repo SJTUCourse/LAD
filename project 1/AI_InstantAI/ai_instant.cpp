@@ -3,6 +3,11 @@
 #include <QtWidgets/QListWidgetItem>
 #include <QtWidgets/QMessageBox>
 #include <QMouseEvent>
+#include <qcolor.h>
+#include <QDebug>
+#include <QOpenGLFunctions>
+#include <QPixmap>
+#include <QScreen>
 
 AI_Instant::AI_Instant(QWidget *parent, Qt::WindowFlags flags)
 	: QDialog(parent, flags)
@@ -185,20 +190,52 @@ void AI_Instant::TimerTicked()
 	RefreshList();
 }
 
+
 void AI_Instant::mousePressEvent(QMouseEvent *event)
 {
+
     QListWidgetItem *item;
     item = ui.listWidget_click->item(0);
+
     QPoint coursePoint;
     coursePoint = QCursor::pos();
     coursePoint = QWidget::mapFromGlobal(coursePoint);
-    double x_location = (coursePoint.x()-110)/621.0*ui.sldXscale->value();
+    //double x_location = (coursePoint.x()-110)/621.0*ui.sldXscale->value();
     double y_location = -(coursePoint.y()-210)/170.0*ui.sldYscale->value();
-    QString str = tr("");
-    str.sprintf("%.4f", y_location);
+
     if(ui.graphFrame->geometry().contains(coursePoint))
-        item->setText(str);
+    {
+        QString str = tr("");
+        str.sprintf("%.4f", y_location);
+        QColor color_get;
+
+        int x = QCursor::pos().x();
+        int y = QCursor::pos().y();
+        QList<QScreen *> list_screen =  QGuiApplication::screens(); //可能电脑接了多个屏幕
+        QPixmap pixmap = list_screen.at(0)->grabWindow(0,x,y,1,1);
+        if (!pixmap.isNull()) //如果像素图不为NULL
+        {
+            QImage image = pixmap.toImage();//将像素图转换为QImage
+            if (!image.isNull()) //如果image不为空
+            {
+                if (image.valid(0, 0)) //坐标位置有效
+                {
+                    color_get = image.pixel(0, 0);
+                }
+            }
+        }
+        qDebug() << "color_get : " << color_get.red() << " "<< color_get.green() << " "<< color_get.blue()<< endl;
+
+        for(int i=0;i<configure.channelCount;i++)
+        {
+            qDebug() << "cmp:  " <<SimpleGraph::lineColor[i].red()<< " "<<SimpleGraph::lineColor[i].green() << " "<< SimpleGraph::lineColor[i].blue()<< endl;
+
+            if(color_get == SimpleGraph::lineColor[i])
+                item->setText(str);
+        }
+    }
 }
+
 
 void AI_Instant::RefreshList()
 {

@@ -30,6 +30,8 @@ public:
 	void Shift(int shiftTime);
 	void Div(int divTime);
 	void paintEvent(QPaintEvent *event);
+    QString str = tr("");
+
 
 private:
 	void CalcDrawParams(double XIncBySec);
@@ -38,17 +40,18 @@ private:
 	void Draw();
 
 private:
-	int			m_plotCount;
+
+    int			m_copyDataCountPerChan;
+    int			m_plotCount;
+    double		m_xCordDividedRate;
+    double		*m_drawDataBuffer;
+    int			m_dataCountCachePerPlot;
+    int			m_mapDataIndexPerPlot;
+    double		m_shiftCount;
 	int			m_pointCountPerScreen;
-	int			m_copyDataCountPerChan;
 	double		m_xIncByTime;
-	double		m_xCordDividedRate;
-	double		*m_drawDataBuffer;
 	QPoint		*m_dataPointBuffer;
-	double		m_shiftCount;
 	int			m_drawDataBufferLength;
-	int			m_dataCountCachePerPlot;
-	int			m_mapDataIndexPerPlot;
 	int			m_dataCountPerPlot;
 	QMutex		mutex;
 	bool		m_recordEndFlag;

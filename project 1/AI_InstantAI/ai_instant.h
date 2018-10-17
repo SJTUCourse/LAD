@@ -38,6 +38,7 @@ public:
 	void SetConfigureDialog(ConfigureDialog *dialog){this->configDialog = dialog;}
 	void SetConfigureParameter(ConfigureParameter value){this->configure = value;}
 
+
 private:
 	Ui::AI_InstantFrame ui;
 	SimpleGraph *graph;
