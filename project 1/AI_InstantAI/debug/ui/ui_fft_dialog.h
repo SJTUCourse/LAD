@@ -115,7 +115,7 @@ public:
         lbl_fre_now->setGeometry(QRect(110, 380, 51, 16));
         lbl_size_now = new QLabel(fft_dialog);
         lbl_size_now->setObjectName(QStringLiteral("lbl_size_now"));
-        lbl_size_now->setGeometry(QRect(110, 440, 61, 16));
+        lbl_size_now->setGeometry(QRect(110, 450, 61, 16));
         lbl_chan_choice = new QLabel(fft_dialog);
         lbl_chan_choice->setObjectName(QStringLiteral("lbl_chan_choice"));
         lbl_chan_choice->setGeometry(QRect(20, 410, 81, 16));

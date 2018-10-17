@@ -271,39 +271,107 @@ void  fft_dialog::IFFT (double xreal [], double ximag [], int n)
 
 void fft_dialog::FFT_show ()
 {
-    //load data
-    char inputfile []="F:\\QT\\MyProgects\\project_1\\file\\channel_0.txt";
-    char outputfile []="F:\\QT\\MyProgects\\project_1\\fft\\out_0.txt";
-    /*
-    switch(channel)
-    {
-      case 0: {inputfile[] = "F:\\QT\\MyProgects\\project_1\\channel_0.txt";break;}
-      case 1: {inputfile[] = "F:\\qt2018\\myproject\\fft_test_code\\input.txt";break;}
-      case 2: {inputfile[] = "F:\\qt2018\\myproject\\fft_test_code\\input.txt";break;}
-      case 3: {inputfile[]= "F:\\qt2018\\myproject\\fft_test_code\\input.txt";break;}
-      case 4: {inputfile = "F:\\qt2018\\myproject\\fft_test_code\\input.txt";break;}
-      case 5: {inputfile = "F:\\qt2018\\myproject\\fft_test_code\\input.txt";break;}
-      case 6: {inputfile = "F:\\qt2018\\myproject\\fft_test_code\\input.txt";break;}
-      case 7: {inputfile = "F:\\qt2018\\myproject\\fft_test_code\\input.txt";break;}
-      default:{break;}
-    }
-    */
     int n=N, i;
     FILE *input,*output;
-    if (!(input = fopen (inputfile, "r")))
+    //load data
+    char inputfile_0 []=".\\channel_0.txt";
+    char inputfile_1 []=".\\channel_1.txt";
+    char inputfile_2 []=".\\channel_2.txt";
+    char inputfile_3 []=".\\channel_3.txt";
+    char inputfile_4 []=".\\channel_4.txt";
+    char inputfile_5 []=".\\channel_5.txt";
+    char inputfile_6 []=".\\channel_6.txt";
+    char inputfile_7 []=".\\channel_7.txt";
+    char outputfile []=".\\out_0.txt";
+
+    switch(channel)
     {
-        printf ("Cannot open file. ");
-        exit (1);
+      case 0:
+      {
+        if (!(input = fopen (inputfile_0, "r")))
+        {
+            printf ("Cannot open file. ");
+            exit (1);
+        };
+        break;
+      }
+      case 1:
+      {
+        if (!(input = fopen (inputfile_1, "r")))
+        {
+            printf ("Cannot open file. ");
+            exit (1);
+        };
+        break;
+      }
+      case 2:
+      {
+        if (!(input = fopen (inputfile_2, "r")))
+        {
+            printf ("Cannot open file. ");
+            exit (1);
+        };
+        break;
+      }
+      case 3:
+      {
+        if (!(input = fopen (inputfile_3, "r")))
+        {
+            printf ("Cannot open file. ");
+            exit (1);
+        };
+        break;
+      }
+      case 4:
+      {
+        if (!(input = fopen (inputfile_4, "r")))
+        {
+            printf ("Cannot open file. ");
+            exit (1);
+        };
+        break;
+      }
+      case 5:
+      {
+        if (!(input = fopen (inputfile_5, "r")))
+        {
+            printf ("Cannot open file. ");
+            exit (1);
+        };
+        break;
+      }
+      case 6:
+      {
+        if (!(input = fopen (inputfile_6, "r")))
+        {
+            printf ("Cannot open file. ");
+            exit (1);
+        };
+        break;
+      }
+      case 7:
+      {
+        if (!(input = fopen (inputfile_7, "r")))
+        {
+            printf ("Cannot open file. ");
+            exit (1);
+        };
+        break;
+      }
+      default:{break;}
     }
+
     if (!(output = fopen (outputfile, "w")))
     {
         printf ("Cannot open file. ");
         exit (1);
     }
+
     for (i=0; i<N;i++)
     {
         fscanf (input, "%lf%lf", xreal + i, ximag + i);
     }
+
     //输出output文件
     fprintf (output, "FFT: i real imag\n ");
     for (i = 0; i < n; i ++)
@@ -317,7 +385,9 @@ void fft_dialog::FFT_show ()
 
     //fftshift 操作
     for (i=0 ; i<n;i++)
-    { xreal[i]=xreal[i]*pow(-1.0,i);}
+    {
+        xreal[i]=xreal[i]*pow(-1.0,i);
+    }
 
     //fft 操作
     FFT (xreal, ximag,n);
@@ -331,6 +401,7 @@ void fft_dialog::FFT_show ()
         printf ("File close error. ");
         exit (1);
     }
+
     if (fclose (output))
     {
         printf ("File close error. ");

@@ -13,14 +13,14 @@
 #include <QTextStream>
 #include "fft_dialog.h"
 
-const QString FILE_PATH_0("F:\\QT\\MyProgects\\project_1\\file\\channel_0.txt");
-const QString FILE_PATH_1("F:\\QT\\MyProgects\\project_1\\file\\channel_1.txt");
-const QString FILE_PATH_2("F:\\QT\\MyProgects\\project_1\\file\\channel_2.txt");
-const QString FILE_PATH_3("F:\\QT\\MyProgects\\project_1\\file\\channel_3.txt");
-const QString FILE_PATH_4("F:\\QT\\MyProgects\\project_1\\file\\channel_4.txt");
-const QString FILE_PATH_5("F:\\QT\\MyProgects\\project_1\\file\\channel_5.txt");
-const QString FILE_PATH_6("F:\\QT\\MyProgects\\project_1\\file\\channel_6.txt");
-const QString FILE_PATH_7("F:\\QT\\MyProgects\\project_1\\file\\channel_7.txt");
+const QString FILE_PATH_0(".\\channel_0.txt");
+const QString FILE_PATH_1(".\\channel_1.txt");
+const QString FILE_PATH_2(".\\channel_2.txt");
+const QString FILE_PATH_3(".\\channel_3.txt");
+const QString FILE_PATH_4(".\\channel_4.txt");
+const QString FILE_PATH_5(".\\channel_5.txt");
+const QString FILE_PATH_6(".\\channel_6.txt");
+const QString FILE_PATH_7(".\\channel_7.txt");
 
 class AI_Instant : public QDialog
 {
