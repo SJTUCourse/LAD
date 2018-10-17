@@ -3,6 +3,11 @@
 #include <QtWidgets/QListWidgetItem>
 #include <QtWidgets/QMessageBox>
 #include <QMouseEvent>
+#include <qcolor.h>
+#include <QDebug>
+#include <QOpenGLFunctions>
+#include <QPixmap>
+#include <QScreen>
 
 AI_Instant::AI_Instant(QWidget *parent, Qt::WindowFlags flags)
 	: QDialog(parent, flags)
@@ -181,24 +186,56 @@ void AI_Instant::TimerTicked()
     }
 
 	int dataCylic = ui.sldTimerValue->value();
-	graph->Chart(scaledData, configure.channelCount, 1, 1.0 * dataCylic / 1000);
+    graph->Chart(scaledData, configure.channelCount, 1, 1.0 * dataCylic / 1000);
 	RefreshList();
 }
 
+
 void AI_Instant::mousePressEvent(QMouseEvent *event)
 {
+
     QListWidgetItem *item;
     item = ui.listWidget_click->item(0);
+
     QPoint coursePoint;
     coursePoint = QCursor::pos();
     coursePoint = QWidget::mapFromGlobal(coursePoint);
-    double x_location = (coursePoint.x()-110)/621.0*ui.sldXscale->value();
+    //double x_location = (coursePoint.x()-110)/621.0*ui.sldXscale->value();
     double y_location = -(coursePoint.y()-210)/170.0*ui.sldYscale->value();
-    QString str = tr("");
-    str.sprintf("%.4f", y_location);
+
     if(ui.graphFrame->geometry().contains(coursePoint))
-        item->setText(str);
+    {
+        QString str = tr("");
+        str.sprintf("%.4f", y_location);
+        QColor color_get;
+
+        int x = QCursor::pos().x();
+        int y = QCursor::pos().y();
+        QList<QScreen *> list_screen =  QGuiApplication::screens(); //可能电脑接了多个屏幕
+        QPixmap pixmap = list_screen.at(0)->grabWindow(0,x,y,1,1);
+        if (!pixmap.isNull()) //如果像素图不为NULL
+        {
+            QImage image = pixmap.toImage();//将像素图转换为QImage
+            if (!image.isNull()) //如果image不为空
+            {
+                if (image.valid(0, 0)) //坐标位置有效
+                {
+                    color_get = image.pixel(0, 0);
+                }
+            }
+        }
+        qDebug() << "color_get : " << color_get.red() << " "<< color_get.green() << " "<< color_get.blue()<< endl;
+
+        for(int i=0;i<configure.channelCount;i++)
+        {
+            qDebug() << "cmp:  " <<SimpleGraph::lineColor[i].red()<< " "<<SimpleGraph::lineColor[i].green() << " "<< SimpleGraph::lineColor[i].blue()<< endl;
+
+            if(color_get == SimpleGraph::lineColor[i])
+                item->setText(str);
+        }
+    }
 }
+
 
 void AI_Instant::RefreshList()
 {
@@ -239,49 +276,49 @@ void AI_Instant::RefreshList()
                 case 0:if (csvFile_0.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_0<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_0.close();
+                               csvFile_0.close();
                            }
                            break;
                 case 1:if (csvFile_1.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_1<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_1.close();
+                               csvFile_1.close();
                            }
                            break;
                 case 2:if (csvFile_2.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_2<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_2.close();
+                               csvFile_2.close();
                            }
                            break;
                 case 3:if (csvFile_3.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_3<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_3.close();
+                               csvFile_3.close();
                            }
                            break;
                 case 4:if (csvFile_4.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_4<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_4.close();
+                               csvFile_4.close();
                            }
                            break;
                 case 5:if (csvFile_5.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_5<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_5.close();
+                               csvFile_5.close();
                            }
                            break;
                 case 6:if (csvFile_6.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_6<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_6.close();
+                               csvFile_6.close();
                            }
                            break;
                 case 7:if (csvFile_7.open(QIODevice::Text | QIODevice::Append))
                            {
                                textStream_7<<dataStr<<"\t"<<0<<endl;
-                               //csvFile_7.close();
+                               csvFile_7.close();
                            }
                            break;
                 }
