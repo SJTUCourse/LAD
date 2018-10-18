@@ -1,0 +1,12 @@
+INPUT(
+./..\..\AI_InstantAI\release\configuredialog.o
+./..\..\AI_InstantAI\release\main.o
+./..\..\AI_InstantAI\release\ai_instant.o
+./..\..\AI_InstantAI\release\simplegraph.o
+./..\..\AI_InstantAI\release\fft_dialog.o
+./..\..\AI_InstantAI\release\qrc_ai_instant.o
+./..\..\AI_InstantAI\release\moc_configuredialog.o
+./..\..\AI_InstantAI\release\moc_ai_instant.o
+./..\..\AI_InstantAI\release\moc_simplegraph.o
+./..\..\AI_InstantAI\release\moc_fft_dialog.o
+);
