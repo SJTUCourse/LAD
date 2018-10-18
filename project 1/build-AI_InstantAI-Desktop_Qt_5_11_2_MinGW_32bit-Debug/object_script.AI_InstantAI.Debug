@@ -1,0 +1,12 @@
+INPUT(
+F:\QT\MyProgects\AI_InstantAI\debug\configuredialog.o
+F:\QT\MyProgects\AI_InstantAI\debug\main.o
+F:\QT\MyProgects\AI_InstantAI\debug\ai_instant.o
+F:\QT\MyProgects\AI_InstantAI\debug\simplegraph.o
+F:\QT\MyProgects\AI_InstantAI\debug\fft_dialog.o
+F:\QT\MyProgects\AI_InstantAI\debug\qrc_ai_instant.o
+F:\QT\MyProgects\AI_InstantAI\debug\moc_configuredialog.o
+F:\QT\MyProgects\AI_InstantAI\debug\moc_ai_instant.o
+F:\QT\MyProgects\AI_InstantAI\debug\moc_simplegraph.o
+F:\QT\MyProgects\AI_InstantAI\debug\moc_fft_dialog.o
+);
