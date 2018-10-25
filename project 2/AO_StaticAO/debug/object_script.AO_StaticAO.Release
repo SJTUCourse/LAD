@@ -1,0 +1,15 @@
+INPUT(
+./..\release\configuredialog.o
+./..\release\main.o
+./..\release\staticao.o
+./..\release\configuredialog.o
+./..\release\main.o
+./..\release\ai_instant.o
+./..\release\simplegraph.o
+./..\release\fft_dialog.o
+./..\release\qrc_staticao.o
+./..\release\qrc_ai_instant.o
+./..\release\moc_configuredialog.o
+./..\release\moc_staticao.o
+./..\release\moc_simplegraph.o
+);
