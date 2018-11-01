@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
@@ -47,12 +48,11 @@ public:
     QPushButton *btn_Pause;
     QPushButton *btn_Stop;
     QPushButton *btn_Start;
-    QSlider *verticalSlider;
     QPushButton *btn_Browse;
     QLabel *txtProfilePath;
     QLabel *label;
-    QSlider *sld_fre;
-    QLabel *label_fre;
+    QComboBox *lst_mode;
+    QLabel *label_2;
 
     void setupUi(QDialog *StaticAOClass)
     {
@@ -228,14 +228,6 @@ public:
         btn_Start->setGeometry(QRect(420, 420, 110, 23));
         btn_Start->setMinimumSize(QSize(75, 23));
         btn_Start->setMaximumSize(QSize(200, 23));
-        verticalSlider = new QSlider(background);
-        verticalSlider->setObjectName(QStringLiteral("verticalSlider"));
-        verticalSlider->setGeometry(QRect(840, 80, 20, 261));
-        verticalSlider->setMinimum(1);
-        verticalSlider->setMaximum(20);
-        verticalSlider->setPageStep(10);
-        verticalSlider->setValue(10);
-        verticalSlider->setOrientation(Qt::Vertical);
         btn_Browse = new QPushButton(background);
         btn_Browse->setObjectName(QStringLiteral("btn_Browse"));
         btn_Browse->setGeometry(QRect(730, 372, 75, 31));
@@ -249,18 +241,23 @@ public:
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(420, 380, 54, 16));
         label->setStyleSheet(QStringLiteral("font: 10pt \"Microsoft New Tai Lue\";"));
-        sld_fre = new QSlider(background);
-        sld_fre->setObjectName(QStringLiteral("sld_fre"));
-        sld_fre->setGeometry(QRect(140, 440, 211, 19));
-        sld_fre->setMinimum(10);
-        sld_fre->setMaximum(1000);
-        sld_fre->setPageStep(200);
-        sld_fre->setValue(200);
-        sld_fre->setOrientation(Qt::Horizontal);
-        label_fre = new QLabel(background);
-        label_fre->setObjectName(QStringLiteral("label_fre"));
-        label_fre->setGeometry(QRect(50, 440, 81, 16));
-        label_fre->setStyleSheet(QStringLiteral("font: 10pt \"Microsoft New Tai Lue\";"));
+        lst_mode = new QComboBox(background);
+        lst_mode->addItem(QString());
+        lst_mode->addItem(QString());
+        lst_mode->addItem(QString());
+        lst_mode->addItem(QString());
+        lst_mode->addItem(QString());
+        lst_mode->setObjectName(QStringLiteral("lst_mode"));
+        lst_mode->setGeometry(QRect(490, 20, 101, 20));
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(lst_mode->sizePolicy().hasHeightForWidth());
+        lst_mode->setSizePolicy(sizePolicy);
+        label_2 = new QLabel(background);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setGeometry(QRect(390, 20, 101, 21));
+        label_2->setStyleSheet(QStringLiteral("font: 10pt \"Microsoft New Tai Lue\";"));
 
         retranslateUi(StaticAOClass);
 
@@ -294,7 +291,13 @@ public:
         btn_Browse->setText(QApplication::translate("StaticAOClass", "Browse", nullptr));
         txtProfilePath->setText(QString());
         label->setText(QApplication::translate("StaticAOClass", "Path :", nullptr));
-        label_fre->setText(QApplication::translate("StaticAOClass", "Frequency \357\274\232", nullptr));
+        lst_mode->setItemText(0, QApplication::translate("StaticAOClass", "continuous", nullptr));
+        lst_mode->setItemText(1, QApplication::translate("StaticAOClass", "100", nullptr));
+        lst_mode->setItemText(2, QApplication::translate("StaticAOClass", "200", nullptr));
+        lst_mode->setItemText(3, QApplication::translate("StaticAOClass", "300", nullptr));
+        lst_mode->setItemText(4, QApplication::translate("StaticAOClass", "400", nullptr));
+
+        label_2->setText(QApplication::translate("StaticAOClass", "Output Mode \357\274\232", nullptr));
     } // retranslateUi
 
 };

@@ -7,6 +7,11 @@
 #include "configuredialog.h"
 #include "../common/WaveformGenerator.h"
 #include "../common/simplegraph.h"
+#include <QFile>
+#include <QString>
+#include <stdio.h>
+#include <stdlib.h>
+#include <QtCore/QCoreApplication>
 
 class StaticAO : public QDialog
 {
@@ -22,6 +27,8 @@ public:
 	void SetConfigureDialog(ConfigureDialog *dialog){this->configDialog = dialog;}
 	void SetConfigureParameter(ConfigureParameter value){this->configure = value;}
 	void ConfigurePanel();
+
+    double xreal[1024],ximag[1024];
 
 private:
 	Ui::StaticAOClass ui;
@@ -44,6 +51,13 @@ private:
 
     SimpleGraph *graph_time;
 
+    bool first_click;
+    bool data_from_file = false;
+    bool continue_mode = true;
+
+    int count = 0;
+    int compare;
+
 private slots:
 	void TimerTicked();
 	void SliderValueChanged(int value);
@@ -54,7 +68,6 @@ private slots:
     void ButtonPauseClicked();
     void ButtonStopClicked();
     void ButtonBrowseClicked();
-
+    void CmbIndexChanged(int value);
 };
-
 #endif // STATICAO_H

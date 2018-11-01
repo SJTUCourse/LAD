@@ -46,7 +46,8 @@ StaticAO::StaticAO(QWidget *parent, Qt::WindowFlags flags)
 	this->m_waveSeled[1] = false;
 	
 	timer = new QTimer(this);
-	connect(timer, SIGNAL(timeout()), this, SLOT(TimerTicked()));
+    connect(ui.lst_mode,SIGNAL(currentIndexChanged(int)),this,SLOT(CmbIndexChanged(int)));
+    connect(timer, SIGNAL(timeout()), this, SLOT(TimerTicked()));
 	connect(ui.timerTrackBar, SIGNAL(valueChanged(int)), this, SLOT(SliderValueChanged(int)));
 	connect(ui.btnConfigure, SIGNAL(clicked()), this, SLOT(ButtonConfigureClicked()));
 	connect(this->buttonGroup1, SIGNAL(buttonClicked(int)), this, SLOT(WaveButtonClicked(int)));
@@ -61,6 +62,7 @@ StaticAO::StaticAO(QWidget *parent, Qt::WindowFlags flags)
     graph_time->m_xCordTimeDiv = 1024;
     graph_time->m_yCordRangeMax = 10;
     graph_time->m_yCordRangeMin = -10;
+
 
 }
 
@@ -84,7 +86,9 @@ void StaticAO::Initialize() {
     ui.btn_Start->setEnabled(false);
     ui.btn_Pause->setEnabled(false);
     ui.btn_Stop->setEnabled(false);
-
+    first_click = true;
+    m_wavePtIdx[0] = 0;
+    m_wavePtIdx[1] = 0;
 }
 
 void StaticAO::ConfigureDevice() {
@@ -176,20 +180,27 @@ void StaticAO::WaveButtonClicked(int id) {
 	m_waveSeled[seledCH] = buttons[id]->isChecked();
 	m_waveParam[seledCH].Style = (WaveformStyle)(id % 3);
 
-	if (seledCH == 0) {
+    if (seledCH == 0)
+    {
 		m_waveParam[seledCH].HighLevel = ui.txtboxHiLevelA->text().toDouble();
 		m_waveParam[seledCH].LowLevel = ui.txtboxLoLevelA->text().toDouble();
-	} else {
+        data_from_file = false;
+        QString str = nullptr;
+        ui.txtProfilePath->setText(str);
+        configure.profilePath = str.toStdWString().c_str();
+    }
+    else
+    {
 		m_waveParam[seledCH].HighLevel = ui.txtboxHiLevelB->text().toDouble();
 		m_waveParam[seledCH].LowLevel = ui.txtboxLoLevelB->text().toDouble();
-	}
+    }
 	m_wavePtIdx[seledCH] = 0;
 
-    QString str = nullptr;
-    ui.txtProfilePath->setText(str);
-    configure.profilePath = str.toStdWString().c_str();
-
-    ui.btn_Start->setEnabled(true);
+    if(first_click)
+    {
+        first_click = false;
+        ui.btn_Start->setEnabled(true);
+    }
 
 }
 
@@ -219,22 +230,47 @@ void StaticAO::ManualClicked(int id) {
     ui.txtProfilePath->setText(str);
     configure.profilePath = str.toStdWString().c_str();
 
-    ui.btn_Start->setEnabled(true);
+    if(first_click)
+    {
+        first_click = false;
+        ui.btn_Start->setEnabled(true);
+    }
 }
 
-void StaticAO::TimerTicked() {
-	for (int i = 0; i < 2; i++) {
-		if (m_waveSeled[i]) {
+void StaticAO::TimerTicked()
+{
+    for (int i = 0; i < 2; i++)
+    {
+        if (m_waveSeled[i])
+        {
 			dataScaled[i] = waveformGenerator->GetOnePoint(m_waveParam[i].Style, m_wavePtIdx[i], m_waveParam[i].HighLevel, m_waveParam[i].LowLevel);
 			m_wavePtIdx[i] = (m_wavePtIdx[i] + 1) % configure.pointCountPerWave;
 		}
 	}
 
+    if(data_from_file)
+    {
+        dataScaled[0] = xreal[m_wavePtIdx[0]];
+        m_wavePtIdx[0] = (m_wavePtIdx[0]+1) % 1024;
+    }
+
 	ErrorCode errorCode = Success;
 	errorCode = instantAoCtrl->Write(channelStart, channelCount, dataScaled);
 
-    graph_time->Chart(dataScaled, 1, 1, 1.0 * ui.timerTrackBar->value() / 1000);
+    graph_time->Chart(dataScaled, configure.channelCount, 1, 1.0 * ui.timerTrackBar->value() / 1000);
 
+    if(!continue_mode)
+    {
+        count = count + 1;
+        if(count == compare)
+        {
+           count = 0;
+           timer->stop();
+           ui.btn_Pause->setEnabled(false);
+           ui.btn_Start->setEnabled(true);
+           ui.btn_Stop->setEnabled(true);
+        }
+    }
     if (errorCode != Success) {
 		timer->stop();
 		CheckError(errorCode);
@@ -270,8 +306,52 @@ void StaticAO::ButtonStopClicked()
 void StaticAO::ButtonBrowseClicked()
 {
     QString str = QFileDialog::getOpenFileName(this, tr("Open Profile"), "../../profile", tr("Image Files(*.txt)"));
-    if(str!= nullptr)
-        ui.btn_Start->setEnabled(true);
     ui.txtProfilePath->setText(str);
     configure.profilePath = str.toStdWString().c_str();
+
+    FILE *input;
+    char* input_file;
+    QByteArray ba=str.toLatin1();
+    input_file=ba.data();
+    if (!(input = fopen (input_file, "r")))
+    {
+        printf ("Cannot open file. ");
+        exit (1);
+    }
+    data_from_file = true;
+    m_wavePtIdx[0] = 0;
+    for (int i=0; i<1024;i++)
+    {
+        fscanf (input, "%lf%lf", xreal + i, ximag + i);
+    }
+    if(first_click)
+    {
+        first_click = false;
+        ui.btn_Start->setEnabled(true);
+    }
+}
+
+void StaticAO::CmbIndexChanged(int value)
+{
+    switch(value)
+    {
+        case 0:continue_mode = true;
+               break;
+        case 1:continue_mode = false;
+               compare = 100;
+               count = 0;
+               break;
+        case 2:continue_mode = false;
+               compare = 200;
+               count = 0;
+               break;
+        case 3:continue_mode = false;
+               compare = 300;
+               count = 0;
+               break;
+        case 4:continue_mode = false;
+               compare = 400;
+               count = 0;
+               break;
+    }
 }

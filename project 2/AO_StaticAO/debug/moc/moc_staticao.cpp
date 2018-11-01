@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_StaticAO_t {
-    QByteArrayData data[13];
-    char stringdata0[181];
+    QByteArrayData data[14];
+    char stringdata0[197];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,14 +43,15 @@ QT_MOC_LITERAL(8, 87, 17), // "WaveButtonClicked"
 QT_MOC_LITERAL(9, 105, 18), // "ButtonStartClicked"
 QT_MOC_LITERAL(10, 124, 18), // "ButtonPauseClicked"
 QT_MOC_LITERAL(11, 143, 17), // "ButtonStopClicked"
-QT_MOC_LITERAL(12, 161, 19) // "ButtonBrowseClicked"
+QT_MOC_LITERAL(12, 161, 19), // "ButtonBrowseClicked"
+QT_MOC_LITERAL(13, 181, 15) // "CmbIndexChanged"
 
     },
     "StaticAO\0TimerTicked\0\0SliderValueChanged\0"
     "value\0ButtonConfigureClicked\0ManualClicked\0"
     "id\0WaveButtonClicked\0ButtonStartClicked\0"
     "ButtonPauseClicked\0ButtonStopClicked\0"
-    "ButtonBrowseClicked"
+    "ButtonBrowseClicked\0CmbIndexChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -60,7 +61,7 @@ static const uint qt_meta_data_StaticAO[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+      10,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -68,15 +69,16 @@ static const uint qt_meta_data_StaticAO[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   59,    2, 0x08 /* Private */,
-       3,    1,   60,    2, 0x08 /* Private */,
-       5,    0,   63,    2, 0x08 /* Private */,
-       6,    1,   64,    2, 0x08 /* Private */,
-       8,    1,   67,    2, 0x08 /* Private */,
-       9,    0,   70,    2, 0x08 /* Private */,
-      10,    0,   71,    2, 0x08 /* Private */,
-      11,    0,   72,    2, 0x08 /* Private */,
-      12,    0,   73,    2, 0x08 /* Private */,
+       1,    0,   64,    2, 0x08 /* Private */,
+       3,    1,   65,    2, 0x08 /* Private */,
+       5,    0,   68,    2, 0x08 /* Private */,
+       6,    1,   69,    2, 0x08 /* Private */,
+       8,    1,   72,    2, 0x08 /* Private */,
+       9,    0,   75,    2, 0x08 /* Private */,
+      10,    0,   76,    2, 0x08 /* Private */,
+      11,    0,   77,    2, 0x08 /* Private */,
+      12,    0,   78,    2, 0x08 /* Private */,
+      13,    1,   79,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -88,6 +90,7 @@ static const uint qt_meta_data_StaticAO[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    4,
 
        0        // eod
 };
@@ -107,6 +110,7 @@ void StaticAO::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 6: _t->ButtonPauseClicked(); break;
         case 7: _t->ButtonStopClicked(); break;
         case 8: _t->ButtonBrowseClicked(); break;
+        case 9: _t->CmbIndexChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     }
@@ -137,13 +141,13 @@ int StaticAO::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 10)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 10;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 10)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 9;
+        _id -= 10;
     }
     return _id;
 }
