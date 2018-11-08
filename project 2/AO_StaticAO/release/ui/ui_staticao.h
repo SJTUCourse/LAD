@@ -52,7 +52,9 @@ public:
     QLabel *txtProfilePath;
     QLabel *label;
     QComboBox *lst_mode;
-    QLabel *label_2;
+    QLabel *label_mode;
+    QLabel *label_fre;
+    QLabel *lbl_fre;
 
     void setupUi(QDialog *StaticAOClass)
     {
@@ -255,10 +257,18 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(lst_mode->sizePolicy().hasHeightForWidth());
         lst_mode->setSizePolicy(sizePolicy);
-        label_2 = new QLabel(background);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(390, 20, 101, 21));
-        label_2->setStyleSheet(QStringLiteral("font: 10pt \"Microsoft New Tai Lue\";"));
+        label_mode = new QLabel(background);
+        label_mode->setObjectName(QStringLiteral("label_mode"));
+        label_mode->setGeometry(QRect(390, 20, 101, 21));
+        label_mode->setStyleSheet(QStringLiteral("font: 10pt \"Microsoft New Tai Lue\";"));
+        label_fre = new QLabel(background);
+        label_fre->setObjectName(QStringLiteral("label_fre"));
+        label_fre->setGeometry(QRect(40, 440, 201, 16));
+        label_fre->setStyleSheet(QStringLiteral("font: 10pt \"Microsoft New Tai Lue\";"));
+        lbl_fre = new QLabel(background);
+        lbl_fre->setObjectName(QStringLiteral("lbl_fre"));
+        lbl_fre->setGeometry(QRect(250, 440, 61, 16));
+        lbl_fre->setStyleSheet(QStringLiteral("font: 10pt \"Microsoft New Tai Lue\";"));
 
         retranslateUi(StaticAOClass);
 
@@ -298,7 +308,9 @@ public:
         lst_mode->setItemText(3, QApplication::translate("StaticAOClass", "300", nullptr));
         lst_mode->setItemText(4, QApplication::translate("StaticAOClass", "400", nullptr));
 
-        label_2->setText(QApplication::translate("StaticAOClass", "Output Mode \357\274\232", nullptr));
+        label_mode->setText(QApplication::translate("StaticAOClass", "Output Mode \357\274\232", nullptr));
+        label_fre->setText(QApplication::translate("StaticAOClass", "The output frequency at present:", nullptr));
+        lbl_fre->setText(QString());
     } // retranslateUi
 
 };

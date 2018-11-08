@@ -1,0 +1,12 @@
+INPUT(
+./..\DI_StaticDI\release\configuredialog.o
+./..\DI_StaticDI\release\main.o
+./..\DI_StaticDI\release\staticdi.o
+./..\DI_StaticDI\release\DioPortUI.o
+./..\DI_StaticDI\release\simplegraph.o
+./..\DI_StaticDI\release\qrc_staticdi.o
+./..\DI_StaticDI\release\moc_configuredialog.o
+./..\DI_StaticDI\release\moc_staticdi.o
+./..\DI_StaticDI\release\moc_DioPortUI.o
+./..\DI_StaticDI\release\moc_simplegraph.o
+);

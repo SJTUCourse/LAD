@@ -5,6 +5,7 @@
 #include <QtWidgets/QListWidgetItem>
 #include <QtWidgets/QMessageBox>
 #include <QFileDialog>
+#include <QtDebug>
 
 StaticAO::StaticAO(QWidget *parent, Qt::WindowFlags flags)
 	: QDialog(parent, flags)
@@ -155,6 +156,7 @@ void StaticAO::ConfigurePanel() {
 void StaticAO::SliderValueChanged(int value) {
 	timer->setInterval(ui.timerTrackBar->value());
 	ui.timerFreqLabel->setText(QString("%1").arg(ui.timerTrackBar->value()) + tr("ms"));
+    ui.lbl_fre->setText(QString("%1").arg(1.0/(ui.timerTrackBar->value()*1e-3*configure.pointCountPerWave)) + tr("Hz"));
 }
 
 void StaticAO::WaveButtonClicked(int id) {
@@ -254,10 +256,13 @@ void StaticAO::TimerTicked()
         m_wavePtIdx[0] = (m_wavePtIdx[0]+1) % 1024;
     }
 
+
 	ErrorCode errorCode = Success;
 	errorCode = instantAoCtrl->Write(channelStart, channelCount, dataScaled);
 
-    graph_time->Chart(dataScaled, configure.channelCount, 1, 1.0 * ui.timerTrackBar->value() / 1000);
+
+    graph_time->Chart(dataScaled, configure.channelCount, 1, 1.0 * ui.timerTrackBar->value() / 500);
+    qDebug()<<1.0 * ui.timerTrackBar->value() / 1000<<"s";
 
     if(!continue_mode)
     {
