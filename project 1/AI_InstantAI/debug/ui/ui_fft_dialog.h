@@ -42,10 +42,12 @@ public:
     QLabel *lbl_chan_choice;
     QLabel *lbl_chan_now;
     QPushButton *btn_show;
-    QLabel *lbl_fs_2_pos;
-    QLabel *lbl_fs_2_neg;
+    QLabel *lbl_fs_2;
+    QLabel *lbl_0hz;
     QLabel *lbl_20V_neg;
     QLabel *lbl_20V_pos;
+    QLabel *lbl_hz_1;
+    QLabel *lbl_hz_2;
 
     void setupUi(QDialog *fft_dialog)
     {
@@ -88,7 +90,7 @@ public:
         lbl_fre_0hz->setGeometry(QRect(190, 400, 31, 16));
         lbl_fre_fs = new QLabel(fft_dialog);
         lbl_fre_fs->setObjectName(QStringLiteral("lbl_fre_fs"));
-        lbl_fre_fs->setGeometry(QRect(720, 400, 31, 16));
+        lbl_fre_fs->setGeometry(QRect(680, 400, 31, 16));
         sld_size = new QSlider(fft_dialog);
         sld_size->setObjectName(QStringLiteral("sld_size"));
         sld_size->setGeometry(QRect(210, 450, 501, 19));
@@ -125,18 +127,24 @@ public:
         btn_show = new QPushButton(fft_dialog);
         btn_show->setObjectName(QStringLiteral("btn_show"));
         btn_show->setGeometry(QRect(530, 410, 91, 23));
-        lbl_fs_2_pos = new QLabel(fft_dialog);
-        lbl_fs_2_pos->setObjectName(QStringLiteral("lbl_fs_2_pos"));
-        lbl_fs_2_pos->setGeometry(QRect(660, 170, 31, 16));
-        lbl_fs_2_neg = new QLabel(fft_dialog);
-        lbl_fs_2_neg->setObjectName(QStringLiteral("lbl_fs_2_neg"));
-        lbl_fs_2_neg->setGeometry(QRect(80, 170, 31, 16));
+        lbl_fs_2 = new QLabel(fft_dialog);
+        lbl_fs_2->setObjectName(QStringLiteral("lbl_fs_2"));
+        lbl_fs_2->setGeometry(QRect(670, 160, 31, 16));
+        lbl_0hz = new QLabel(fft_dialog);
+        lbl_0hz->setObjectName(QStringLiteral("lbl_0hz"));
+        lbl_0hz->setGeometry(QRect(70, 160, 31, 16));
         lbl_20V_neg = new QLabel(fft_dialog);
         lbl_20V_neg->setObjectName(QStringLiteral("lbl_20V_neg"));
         lbl_20V_neg->setGeometry(QRect(30, 340, 31, 16));
         lbl_20V_pos = new QLabel(fft_dialog);
         lbl_20V_pos->setObjectName(QStringLiteral("lbl_20V_pos"));
         lbl_20V_pos->setGeometry(QRect(30, 200, 31, 16));
+        lbl_hz_1 = new QLabel(fft_dialog);
+        lbl_hz_1->setObjectName(QStringLiteral("lbl_hz_1"));
+        lbl_hz_1->setGeometry(QRect(690, 160, 31, 16));
+        lbl_hz_2 = new QLabel(fft_dialog);
+        lbl_hz_2->setObjectName(QStringLiteral("lbl_hz_2"));
+        lbl_hz_2->setGeometry(QRect(710, 400, 31, 16));
 
         retranslateUi(fft_dialog);
 
@@ -151,7 +159,7 @@ public:
         lbl_fre_choice->setText(QApplication::translate("fft_dialog", "\346\273\244\346\263\242\351\242\221\347\216\207\351\200\211\346\213\251", nullptr));
         lbl_size_choice->setText(QApplication::translate("fft_dialog", "lg(\347\274\251\346\224\276\345\271\205\345\272\246)", nullptr));
         lbl_fre_0hz->setText(QApplication::translate("fft_dialog", "0Hz", nullptr));
-        lbl_fre_fs->setText(QApplication::translate("fft_dialog", "fs/2", nullptr));
+        lbl_fre_fs->setText(QString());
         lbl_size_2_neg->setText(QApplication::translate("fft_dialog", "-2", nullptr));
         lbl_size_2_pos->setText(QApplication::translate("fft_dialog", "2", nullptr));
         btn_lowpass->setText(QApplication::translate("fft_dialog", "\344\275\216\351\200\232\346\273\244\346\263\242", nullptr));
@@ -162,10 +170,12 @@ public:
         lbl_chan_choice->setText(QApplication::translate("fft_dialog", "\345\275\223\345\211\215\351\200\211\346\213\251\351\200\232\351\201\223", nullptr));
         lbl_chan_now->setText(QApplication::translate("fft_dialog", "0", nullptr));
         btn_show->setText(QApplication::translate("fft_dialog", "\344\277\241\345\217\267\346\230\276\347\244\272", nullptr));
-        lbl_fs_2_pos->setText(QApplication::translate("fft_dialog", "fs/2", nullptr));
-        lbl_fs_2_neg->setText(QApplication::translate("fft_dialog", "-fs/2", nullptr));
+        lbl_fs_2->setText(QString());
+        lbl_0hz->setText(QApplication::translate("fft_dialog", "0Hz", nullptr));
         lbl_20V_neg->setText(QApplication::translate("fft_dialog", "-20V", nullptr));
         lbl_20V_pos->setText(QApplication::translate("fft_dialog", " 20V", nullptr));
+        lbl_hz_1->setText(QApplication::translate("fft_dialog", "Hz", nullptr));
+        lbl_hz_2->setText(QApplication::translate("fft_dialog", "Hz", nullptr));
     } // retranslateUi
 
 };

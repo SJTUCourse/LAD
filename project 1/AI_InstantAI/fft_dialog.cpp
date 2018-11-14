@@ -18,13 +18,18 @@ fft_dialog::fft_dialog(QWidget *parent) :
     connect(ui->sld_fre,SIGNAL(valueChanged(int)),this,SLOT(SLideFreChange(int)));
     connect(ui->sld_size,SIGNAL(valueChanged(int)),this,SLOT(SLideSizeChange(int)));
 
+    QString str = tr("");
+    str.sprintf("%.0f",fs/2.0);
+    ui->lbl_fre_fs->setText(str);
+    ui->lbl_fs_2->setText(str);
+
     graph_fre = new SimpleGraph(ui->fre_Frame);
     graph_fre->setFixedSize(ui->fre_Frame->size());
 
     graph_time = new SimpleGraph(ui->Time_Frame);
     graph_time->setFixedSize(ui->Time_Frame->size());
 
-    graph_fre->m_xCordTimeDiv = 1024;
+    graph_fre->m_xCordTimeDiv = 512;
     graph_fre->m_yCordRangeMax = 600;
     graph_fre->m_yCordRangeMin = -150;
 
@@ -63,7 +68,11 @@ void fft_dialog::ButtonLowPassClicked()
     }
 
     //显示IFFT_结果
-    graph_time->Chart(filterreal, 1, 1024, 1.0 * 10 / 1000);
+    double size_out [1024] = {0};
+    size_change_form_origin = qPow(10,(ui->sld_size->value()/100.0*2));
+    for(int i=0;i<N;i++)
+        size_out[i] = size_change_form_origin * filterreal[i];
+    graph_time->Chart(size_out, 1, 1024, 1.0 * 10 / 1000);
 }
 
 void fft_dialog::ButtonHighPassClicked()
@@ -96,7 +105,11 @@ void fft_dialog::ButtonHighPassClicked()
     }
 
     //显示IFFT_结果
-    graph_time->Chart(filterreal, 1, 1024, 1.0 * 10 / 1000);
+    double size_out [1024] = {0};
+    size_change_form_origin = qPow(10,(ui->sld_size->value()/100.0*2));
+    for(int i=0;i<N;i++)
+        size_out[i] = size_change_form_origin * filterreal[i];
+    graph_time->Chart(size_out, 1, 1024, 1.0 * 10 / 1000);
 }
 
 void fft_dialog::ButttonSizeChangeClicked()
@@ -381,7 +394,11 @@ void fft_dialog::FFT_show ()
     fprintf (output, "================================= ");
 
     //显示时间域结果
-    graph_time->Chart(xreal, 1, 1024, 1.0 * 10 / 1000);
+    double size_out [1024] = {0};
+    size_change_form_origin = qPow(10,(ui->sld_size->value()/100.0*2));
+    for(int i=0;i<N;i++)
+        size_out[i] = size_change_form_origin * xreal[i];
+    graph_time->Chart(size_out, 1, 1024, 1.0 * 10 / 1000);
 
     //fftshift 操作
     for (i=0 ; i<n;i++)
@@ -393,7 +410,10 @@ void fft_dialog::FFT_show ()
     FFT (xreal, ximag,n);
 
     //显示频域结果
-    graph_fre->Chart(xreal, 1, 1024, 1.0 * 10 / 1000);
+    double tmp[512]={0};
+    for(i=0;i<512;i++)
+        tmp[i]=xreal[i+512];
+    graph_fre->Chart(tmp, 1, 512, 1.0 * 10 / 1000);
 
     //关闭文件
     if (fclose (input))

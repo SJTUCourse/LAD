@@ -64,7 +64,6 @@ StaticAO::StaticAO(QWidget *parent, Qt::WindowFlags flags)
     graph_time->m_yCordRangeMax = 10;
     graph_time->m_yCordRangeMin = -10;
 
-
 }
 
 StaticAO::~StaticAO()
@@ -84,12 +83,17 @@ void StaticAO::Initialize() {
 
 	ConfigureDevice();
 	ConfigurePanel();
+
+    first_click = true;
     ui.btn_Start->setEnabled(false);
     ui.btn_Pause->setEnabled(false);
     ui.btn_Stop->setEnabled(false);
-    first_click = true;
+
     m_wavePtIdx[0] = 0;
     m_wavePtIdx[1] = 0;
+
+    ui.lbl_fre->setText(QString("%1").arg(1.0/(ui.timerTrackBar->value()*1e-3*configure.pointCountPerWave)) + tr("Hz"));
+
 }
 
 void StaticAO::ConfigureDevice() {
