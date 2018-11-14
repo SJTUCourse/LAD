@@ -144,14 +144,14 @@
   <widget class="QLabel" name="lbl_fre_fs">
    <property name="geometry">
     <rect>
-     <x>720</x>
+     <x>680</x>
      <y>400</y>
      <width>31</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>fs/2</string>
+    <string/>
    </property>
   </widget>
   <widget class="QSlider" name="sld_size">
@@ -303,30 +303,30 @@
     <string>信号显示</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_fs_2_pos">
+  <widget class="QLabel" name="lbl_fs_2">
    <property name="geometry">
     <rect>
-     <x>660</x>
-     <y>170</y>
+     <x>670</x>
+     <y>160</y>
      <width>31</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>fs/2</string>
+    <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="lbl_fs_2_neg">
+  <widget class="QLabel" name="lbl_0hz">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>170</y>
+     <x>70</x>
+     <y>160</y>
      <width>31</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>-fs/2</string>
+    <string>0Hz</string>
    </property>
   </widget>
   <widget class="QLabel" name="lbl_20V_neg">
@@ -353,6 +353,32 @@
    </property>
    <property name="text">
     <string> 20V</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_hz_1">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>160</y>
+     <width>31</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Hz</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbl_hz_2">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>400</y>
+     <width>31</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Hz</string>
    </property>
   </widget>
  </widget>

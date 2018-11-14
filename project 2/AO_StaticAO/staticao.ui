@@ -824,7 +824,7 @@
      </property>
     </item>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="label_mode">
     <property name="geometry">
      <rect>
       <x>390</x>
@@ -838,6 +838,38 @@
     </property>
     <property name="text">
      <string>Output Mode ：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_fre">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>440</y>
+      <width>201</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 10pt &quot;Microsoft New Tai Lue&quot;;</string>
+    </property>
+    <property name="text">
+     <string>The output frequency at present:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lbl_fre">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>440</y>
+      <width>61</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 10pt &quot;Microsoft New Tai Lue&quot;;</string>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
