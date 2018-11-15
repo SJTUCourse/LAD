@@ -3,10 +3,13 @@
 
 #include <QDialog>
 #include <QTimer>
+#include <QtWidgets/QDialog>
+#include <QtCore/QtCore>
 #include "ui_staticdi.h"
 #include "configuredialog.h"
 #include "../common/DioPortUI.h"
 #include "../common/simplegraph.h"
+#include <QPushButton>
 
 class StaticDI : public QDialog
 {
@@ -33,6 +36,7 @@ private:
 	QVBoxLayout* layout;
 
 	int portCount;
+    int portCount2;
 	int portPanelLength;
 	QString images[2];
     QTimer *timer;
@@ -45,12 +49,17 @@ private:
     quint8 old_State = quint8(0);
     int counter = 0;
 
-    uint8 data[1];
+    quint8 data[1];
+
+    bool mode = true;
+    int compare;//unit:ms
 
 private slots:
 	void ButtonConfigureClicked();
 	void TimerTicked();
     void DrawGraph();
+    void CmbIndexChanged(int value);
+    void ButtonNextClicked();
 };
 
 #endif // STATICDI_H
