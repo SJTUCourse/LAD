@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QFrame>
 #include <QtWidgets/QLabel>
@@ -31,6 +32,9 @@ public:
     QFrame *Time_Frame;
     QLabel *lbl_4_5;
     QLabel *lbl_neg_1_5;
+    QComboBox *lst_mode;
+    QLabel *label_mode;
+    QPushButton *btn_next;
 
     void setupUi(QDialog *StaticDIClass)
     {
@@ -81,6 +85,26 @@ public:
         lbl_neg_1_5 = new QLabel(StaticDIClass);
         lbl_neg_1_5->setObjectName(QStringLiteral("lbl_neg_1_5"));
         lbl_neg_1_5->setGeometry(QRect(400, 380, 54, 12));
+        lst_mode = new QComboBox(StaticDIClass);
+        lst_mode->addItem(QString());
+        lst_mode->addItem(QString());
+        lst_mode->addItem(QString());
+        lst_mode->addItem(QString());
+        lst_mode->setObjectName(QStringLiteral("lst_mode"));
+        lst_mode->setGeometry(QRect(130, 200, 101, 20));
+        QSizePolicy sizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(lst_mode->sizePolicy().hasHeightForWidth());
+        lst_mode->setSizePolicy(sizePolicy);
+        label_mode = new QLabel(StaticDIClass);
+        label_mode->setObjectName(QStringLiteral("label_mode"));
+        label_mode->setGeometry(QRect(30, 200, 101, 21));
+        label_mode->setStyleSheet(QStringLiteral("font: 10pt \"Microsoft New Tai Lue\";"));
+        btn_next = new QPushButton(StaticDIClass);
+        btn_next->setObjectName(QStringLiteral("btn_next"));
+        btn_next->setGeometry(QRect(250, 200, 100, 23));
+        btn_next->setMinimumSize(QSize(75, 23));
 
         retranslateUi(StaticDIClass);
 
@@ -94,6 +118,13 @@ public:
         label->setText(QApplication::translate("StaticDIClass", "Port No.    Bit7                          4            3                             0          Hex", nullptr));
         lbl_4_5->setText(QApplication::translate("StaticDIClass", "4.5V", nullptr));
         lbl_neg_1_5->setText(QApplication::translate("StaticDIClass", "-1.5V", nullptr));
+        lst_mode->setItemText(0, QApplication::translate("StaticDIClass", "continuous", nullptr));
+        lst_mode->setItemText(1, QApplication::translate("StaticDIClass", "5s", nullptr));
+        lst_mode->setItemText(2, QApplication::translate("StaticDIClass", "10s", nullptr));
+        lst_mode->setItemText(3, QApplication::translate("StaticDIClass", "20s", nullptr));
+
+        label_mode->setText(QApplication::translate("StaticDIClass", "Output Mode \357\274\232", nullptr));
+        btn_next->setText(QApplication::translate("StaticDIClass", "Next output", nullptr));
     } // retranslateUi
 
 };

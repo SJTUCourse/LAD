@@ -25,6 +25,9 @@ StaticDI::StaticDI(QWidget *parent, Qt::WindowFlags flags)
 	connect(timer, SIGNAL(timeout()), this, SLOT(TimerTicked()));
     connect(timer_graph, SIGNAL(timeout()), this, SLOT(DrawGraph()));
 
+    connect(ui.lst_mode,SIGNAL(currentIndexChanged(int)),this,SLOT(CmbIndexChanged(int)));
+    connect(ui.btn_next, SIGNAL(clicked()), this, SLOT(ButtonNextClicked()));
+
     graph = new SimpleGraph(ui.Time_Frame);
     graph->setFixedSize(ui.Time_Frame->size());
     graph->m_xCordTimeDiv = 60;
@@ -45,7 +48,7 @@ void StaticDI::Initialize() {
 	InitializePortPanel();
 
 	//start the timer to read DI ports status
-	timer->start(50);
+    timer->start(50);
 }
 
 void StaticDI::ConfigureDevice() {
@@ -59,6 +62,14 @@ void StaticDI::ConfigureDevice() {
 	CheckError(errorCode);
     //portCount = instantDiCtrl->getPortCount();
     portCount = 1;
+
+    ErrorCode errorCode2 = Success;
+    errorCode2 = instantDoCtrl->setSelectedDevice(selected);
+    CheckError(errorCode2);
+    errorCode2 = instantDoCtrl->LoadProfile(configure.profilePath);
+    CheckError(errorCode2);
+    //portCount2 = instantDiCtrl->getPortCount();
+    portCount2 = 1;
 }
 
 void StaticDI::InitializePortPanel() {
@@ -113,7 +124,7 @@ void StaticDI::TimerTicked() {
     errorCode = instantDiCtrl->Read(0, portCount, portStates);
 	CheckError(errorCode);
 
-    data[0] = portStates;
+    data[0] = *portStates;
 
 	//update the UI
 	for (int i = 0; i < portCount; i++) {
@@ -136,14 +147,31 @@ void StaticDI::TimerTicked() {
             if(frequency == 0)
                 timer_graph->setInterval(1.0/(1000));
             else
-                timer_graph->setInterval(1.0/(frequency*20));
+                timer_graph->setInterval(1.0*1000/(frequency*20));
+        }
+        else
+        {
+            if(frequency == 0)
+                timer_graph->setInterval(1.0/(1000));
+            else
+                timer_graph->setInterval(1.0*1000/(frequency*20));
         }
     }
     else
         timer_graph->stop();
+
+    if(!mode)
+        compare = compare-50;
+    if(!mode && compare==0)
+    {
+        timer->stop();
+        timer_graph->stop();
+    }
+
 }
 
-void StaticDI::DrawGraph() {
+void StaticDI::DrawGraph()
+{
     counter = counter % 20;
     double amp_tmp[1];
     if(frequency == 0)
@@ -156,8 +184,47 @@ void StaticDI::DrawGraph() {
         amp_tmp[0] = (counter/10)*amp;
         graph->Chart(amp_tmp, 1, 1, 1.0/(frequency*20));
     }
-
     counter=counter+1;
 
+    quint8 data_tmp[1];
+    if(amp_tmp[0]>0)
+        data_tmp[0] = 0x01;
+    else
+        data_tmp[0] = 0x00;
+    ErrorCode errorCode = Success;
+    errorCode = instantDoCtrl->Write(0, 1, &data_tmp[0]);
+    CheckError(errorCode);
+}
 
+void StaticDI::CmbIndexChanged(int value)
+{
+    switch(value)
+    {
+        case 0:mode = true;
+               timer->start(50);
+               ui.btn_next->setEnabled(false);
+               break;
+        case 1:mode = false;
+               ui.btn_next->setEnabled(true);
+               timer->stop();
+               timer_graph->stop();
+               break;
+        case 2:mode = false;
+               ui.btn_next->setEnabled(true);
+               timer->stop();
+               timer_graph->stop();
+               break;
+        case 3:mode = false;
+               ui.btn_next->setEnabled(true);
+               timer->stop();
+               timer_graph->stop();
+               break;
+    }
+
+}
+
+void StaticDI::ButtonNextClicked()
+{
+    timer->start(50);
+    compare = ui.lst_mode->currentIndex() * 5000;
 }
